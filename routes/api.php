@@ -22,9 +22,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::get('sanctum/csrf-cookie', [Laravel\Sanctum\Http\Controllers\CsrfCookieController::class, 'show']);
 
@@ -32,6 +29,8 @@ Route::get('sanctum/csrf-cookie', [Laravel\Sanctum\Http\Controllers\CsrfCookieCo
 Route::post('authorizations', [AuthenticatedSessionController::class, 'store']);
 Route::post('register', [RegisterUserController::class, 'store']);
 
+// 用户信息
+Route::get('user/{user}', [UserController::class, 'show']);
 
 // 需要登录才可以操作的接口
 Route::middleware('auth:sanctum')->group(function($route) {
@@ -45,6 +44,7 @@ Route::middleware('auth:sanctum')->group(function($route) {
     $route->post('user', [UserController::class, 'update']);
     $route->get('user/collect', [UserController::class, 'collect']);
 });
+Route::get('collect', [CollectController::class, 'index']);
 Route::post('collect/{collect:link}/check_password', [CollectController::class, 'checkPassword']);
 Route::get('collect/{collect:link}', [CollectController::class, 'show']);
 // 标签
