@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterUserController;
 use App\Http\Controllers\Api\CollectController;
+use App\Http\Controllers\Api\TagController;
 use App\Http\Controllers\Api\UploadController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -46,6 +47,8 @@ Route::middleware('auth:sanctum')->group(function($route) {
 });
 Route::post('collect/{collect:link}/check_password', [CollectController::class, 'checkPassword']);
 Route::get('collect/{collect:link}', [CollectController::class, 'show']);
+// 标签
+Route::get('tags', [TagController::class, 'index']);
 Route::post('pictures', [PictureController::class, 'store']);
 Route::get('pictures', [PictureController::class, 'show']);
 Route::get('random', [PictureController::class, 'index']);

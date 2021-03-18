@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Scout\Searchable;
+use Spatie\Tags\HasTags;
 
 class Picture extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory, HasTags, Searchable;
     protected $fillable = ['title', 'tag', 'url', 'path', 'width', 'height'];
 
     protected $appends = ['url'];

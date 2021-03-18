@@ -136,6 +136,9 @@
       <path value="$PROJECT_DIR$/vendor/barryvdh/reflection-docblock" />
       <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-ide-helper" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-query-builder" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-translatable" />
+      <path value="$PROJECT_DIR$/vendor/spatie/eloquent-sortable" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-tags" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />

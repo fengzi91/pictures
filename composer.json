@@ -18,7 +18,8 @@
         "laravel/tinker": "^2.5",
         "meilisearch/meilisearch-laravel-scout": "^0.12.5",
         "overtrue/laravel-lang": "^4.2",
-        "spatie/laravel-query-builder": "^3.3"
+        "spatie/laravel-query-builder": "^3.3",
+        "spatie/laravel-tags": "^2.7"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.9",

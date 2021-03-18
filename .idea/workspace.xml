@@ -5,12 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/laravel-breeze.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/laravel-breeze.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/CollectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/CollectController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthenticatedSessionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthenticatedSessionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Collect.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Collect.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PictureController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PictureController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Picture.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Picture.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Policies/CollectPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Policies/CollectPolicy.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
@@ -163,6 +160,9 @@
       <path value="$PROJECT_DIR$/vendor/barryvdh/reflection-docblock" />
       <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-ide-helper" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-query-builder" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-translatable" />
+      <path value="$PROJECT_DIR$/vendor/spatie/eloquent-sortable" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-tags" />
     </include_path>
   </component>
   <component name="ProjectId" id="1ogi9lHpteCB2d5exjhK9XN1Ui4" />
@@ -204,7 +204,7 @@
       <workItem from="1615725048967" duration="487000" />
       <workItem from="1615731343470" duration="146000" />
       <workItem from="1615749546115" duration="16501000" />
-      <workItem from="1615923597092" duration="9850000" />
+      <workItem from="1615923597092" duration="18902000" />
     </task>
     <servers />
   </component>
@@ -216,9 +216,9 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="698" y="313" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1920.1057@0.23.1920.1057" timestamp="1615932135233" />
-    <state x="625" y="258" width="670" height="676" key="search.everywhere.popup" timestamp="1615931162173">
+    <state x="625" y="258" width="670" height="676" key="search.everywhere.popup" timestamp="1616030231934">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="625" y="258" width="670" height="676" key="search.everywhere.popup/0.23.1920.1057@0.23.1920.1057" timestamp="1615931162173" />
+    <state x="625" y="258" width="670" height="676" key="search.everywhere.popup/0.23.1920.1057@0.23.1920.1057" timestamp="1616030231934" />
   </component>
 </project>
