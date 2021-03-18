@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterUserController;
+use App\Http\Controllers\Api\Auth\UpdatePasswordController;
 use App\Http\Controllers\Api\CollectController;
 use App\Http\Controllers\Api\TagController;
 use App\Http\Controllers\Api\UploadController;
@@ -43,6 +44,7 @@ Route::middleware('auth:sanctum')->group(function($route) {
     // 用户
     $route->post('user', [UserController::class, 'update']);
     $route->get('user/collect', [UserController::class, 'collect']);
+    $route->post('password', [UpdatePasswordController::class, 'store']);
 });
 Route::get('collect', [CollectController::class, 'index']);
 Route::post('collect/{collect:link}/check_password', [CollectController::class, 'checkPassword']);

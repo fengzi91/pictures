@@ -13,7 +13,7 @@ class TagController extends Controller
     public function index(Request $request, Tag $tag)
     {
         $tags = Cache::remember('tags', 60 * 60 * 12 , function () {
-            return Tag::where('type', 'picture')->get()->map(function($tag) {
+            return Tag::where('type', 'picture')->where('count', '>=', 100)->get()->map(function($tag) {
                 return [
                     'id' => $tag->id,
                     'name' => $tag->name,
@@ -25,7 +25,7 @@ class TagController extends Controller
         $tags = $tags->map(function($tagData) use ($tag) {
             $tagData['count'] = $tag->getCountById($tagData['id']);
             return $tagData;
-        });
+        })->sortByDesc('count');
         return TagResource::collection($tags);
     }
 

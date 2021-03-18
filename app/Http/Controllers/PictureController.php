@@ -31,23 +31,19 @@ class PictureController extends Controller
     public function index(Request $request, Picture $picture)
     {
         $keyword = $request->input('keyword', '');
-        $filter = $request->input('filter', []);
-//        $filters = collect($filter)->map(function($item) {
-//            return ['tag:' . $item];
-//        });
-            $pictures = $picture->search($keyword, function(Indexes $meilisearch, $query, $options) {
-//                $options['facetsDistribution'] = ['tag'];
-//                if ($filters->count() > 0) {
-//                    $options['facetFilters'] = $filters;
-//                }
+        $tag = $request->input('tag', 0);
+        $filters = null;
+        if ($tag > 0) {
+            $filters .= 'tag_id = ' . $tag;
+        }
+            $pictures = $picture->search($keyword, function(Indexes $meilisearch, $query, $options)  use ($filters) {
+                if ($filters) {
+                    $options['filters'] = $filters;
+                }
                 return $meilisearch->search($query, $options);
             });
             $data = $pictures->paginate(40);
             return PictureResource::collection($data);
-//        } else {
-//            $pictures = $picture->query()->where('id', '>', 100)->oldest()->paginate(40);
-//        }
-        // return PictureResource::collection($pictures);
     }
 
     public function all(Picture $picture)
