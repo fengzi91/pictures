@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="48f2eab9-fdc1-47a8-9d44-43b63cc8b5c0" name="默认的" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/laravel-breeze.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/laravel-breeze.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/CollectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/CollectController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/TagController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/TagController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PictureController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PictureController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Collect.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Collect.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Picture.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Picture.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -204,7 +202,7 @@
       <workItem from="1615725048967" duration="487000" />
       <workItem from="1615731343470" duration="146000" />
       <workItem from="1615749546115" duration="16501000" />
-      <workItem from="1615923597092" duration="18902000" />
+      <workItem from="1615923597092" duration="26694000" />
     </task>
     <servers />
   </component>
@@ -212,13 +210,13 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="698" y="313" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1615932135233">
+    <state x="698" y="313" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1616055879261">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="698" y="313" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1920.1057@0.23.1920.1057" timestamp="1615932135233" />
-    <state x="625" y="258" width="670" height="676" key="search.everywhere.popup" timestamp="1616030231934">
+    <state x="698" y="313" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1920.1057@0.23.1920.1057" timestamp="1616055879261" />
+    <state x="625" y="258" width="670" height="676" key="search.everywhere.popup" timestamp="1616056150584">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="625" y="258" width="670" height="676" key="search.everywhere.popup/0.23.1920.1057@0.23.1920.1057" timestamp="1616030231934" />
+    <state x="625" y="258" width="670" height="676" key="search.everywhere.popup/0.23.1920.1057@0.23.1920.1057" timestamp="1616056150584" />
   </component>
 </project>

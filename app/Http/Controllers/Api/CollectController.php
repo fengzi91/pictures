@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CollectResource;
 use App\Models\Collect;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 
 class CollectController extends Controller
@@ -14,11 +15,23 @@ class CollectController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection|\Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-
+        $query = Collect::query();
+        if ($keyword = $request->keyword) {
+            $query->where('title', 'LIKE', "%{$keyword}%");
+        }
+        $collects = QueryBuilder::for($query)
+            ->allowedIncludes('pictures')
+            ->allowedFilters(AllowedFilter::exact('user_id'))
+            ->allowedSorts(['created_at', 'thumb_up', 'view_counts'])
+            ->with('user')
+            ->has('pictures')
+            ->whereNull('password')
+            ->paginate(10);
+        return CollectResource::collection($collects);
     }
 
     /**

@@ -24,4 +24,17 @@ class Picture extends Model
     {
         return isset($_ENV['VAPOR_ARTIFACT_NAME']) ? 's3' : 'public';
     }
+
+    public function toSearchableArray()
+    {
+        $data = $this->toArray();
+        $this->loadMissing('tags');
+        $data['tag_name'] = $this->tags->map(function($tag) {
+          return $tag->name;
+        })->toArray();
+        $data['tag_id'] = $this->tags->map(function($tag) {
+            return $tag->id;
+        })->toArray();
+        return $data;
+    }
 }
