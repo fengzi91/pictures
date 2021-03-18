@@ -22,6 +22,11 @@ class CollectPolicy
 
     public function view(?User $user, Collect $collect)
     {
-        return request('password') === $collect->password || optional($user)->id === $collect->id;
+        return request('password') === $collect->password || optional($user)->id === $collect->user_id;
+    }
+
+    public function update(User $user, Collect $collect)
+    {
+        return $user->id === $collect->user_id;
     }
 }

@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\DateTimeFormat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
 
 class Collect extends Model
 {
-    use HasFactory;
+    use HasFactory, DateTimeFormat;
 
     protected $fillable = ['title', 'password'];
 

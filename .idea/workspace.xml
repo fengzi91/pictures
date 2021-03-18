@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="48f2eab9-fdc1-47a8-9d44-43b63cc8b5c0" name="默认的" comment="" />
+    <list default="true" id="48f2eab9-fdc1-47a8-9d44-43b63cc8b5c0" name="默认的" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/laravel-breeze.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/laravel-breeze.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/CollectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/CollectController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthenticatedSessionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthenticatedSessionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Collect.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Collect.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Picture.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Picture.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Policies/CollectPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Policies/CollectPolicy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,6 +23,9 @@
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -136,6 +152,17 @@
       <path value="$PROJECT_DIR$/vendor/laravel-lang/lang" />
       <path value="$PROJECT_DIR$/vendor/overtrue/laravel-lang" />
       <path value="$PROJECT_DIR$/vendor/laravel/sanctum" />
+      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/vendor/justinrainbow/json-schema" />
+      <path value="$PROJECT_DIR$/vendor/react/promise" />
+      <path value="$PROJECT_DIR$/vendor/seld/phar-utils" />
+      <path value="$PROJECT_DIR$/vendor/seld/jsonlint" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-ide-helper" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-query-builder" />
     </include_path>
   </component>
   <component name="ProjectId" id="1ogi9lHpteCB2d5exjhK9XN1Ui4" />
@@ -176,7 +203,8 @@
       <workItem from="1615686540623" duration="6545000" />
       <workItem from="1615725048967" duration="487000" />
       <workItem from="1615731343470" duration="146000" />
-      <workItem from="1615749546115" duration="9931000" />
+      <workItem from="1615749546115" duration="16501000" />
+      <workItem from="1615923597092" duration="9850000" />
     </task>
     <servers />
   </component>
@@ -184,13 +212,13 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="698" y="313" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1615769979089">
+    <state x="698" y="313" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1615932135233">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="698" y="313" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1920.1057@0.23.1920.1057" timestamp="1615769979089" />
-    <state x="625" y="258" width="670" height="676" key="search.everywhere.popup" timestamp="1615780171455">
+    <state x="698" y="313" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1920.1057@0.23.1920.1057" timestamp="1615932135233" />
+    <state x="625" y="258" width="670" height="676" key="search.everywhere.popup" timestamp="1615931162173">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="625" y="258" width="670" height="676" key="search.everywhere.popup/0.23.1920.1057@0.23.1920.1057" timestamp="1615780171455" />
+    <state x="625" y="258" width="670" height="676" key="search.everywhere.popup/0.23.1920.1057@0.23.1920.1057" timestamp="1615931162173" />
   </component>
 </project>

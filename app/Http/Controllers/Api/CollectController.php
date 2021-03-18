@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CollectResource;
 use App\Models\Collect;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class CollectController extends Controller
 {
@@ -14,9 +16,9 @@ class CollectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
     }
 
     /**
@@ -27,12 +29,7 @@ class CollectController extends Controller
      */
     public function store(Request $request, Collect $collect)
     {
-        $request->validate([
-            'title' => 'nullable|string|between:5,32',
-            'password' => 'nullable|string|min:4,max:12',
-            'pictures' => 'array',
-            'pictures.*' => 'integer',
-        ]);
+        $request->validate($this->rules());
         $collect->fill($request->all());
         $collect->user_id = $request->user()->id;
         $collect->save();
@@ -47,7 +44,7 @@ class CollectController extends Controller
      * @param  Collect  $collect
      * @return CollectResource|\Illuminate\Http\Response
      */
-    public function show(Collect $collect)
+    public function show(Request $request, Collect $collect)
     {
         $this->authorize('view', $collect);
         $collect->loadMissing('pictures');
@@ -63,26 +60,21 @@ class CollectController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return CollectResource|\Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Collect $collect)
     {
-        //
+        $this->authorize('update', $collect);
+        $request->validate($this->rules());
+        $collect->fill($request->all());
+        $collect->save();
+        $collect->pictures()->sync($request->pictures);
+        $collect->load('pictures');
+        return CollectResource::make($collect);
     }
 
     /**
@@ -94,5 +86,15 @@ class CollectController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    protected function rules()
+    {
+        return [
+            'title' => 'nullable|string|between:5,32',
+            'password' => 'nullable|string|min:4,max:12',
+            'pictures' => 'array',
+            'pictures.*' => 'integer'
+        ];
     }
 }
