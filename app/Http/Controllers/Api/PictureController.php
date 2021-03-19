@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\PictureCollection;
 use App\Http\Resources\PictureResource;
 use App\Models\Picture;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use MeiliSearch\Endpoints\Indexes;
 
 class PictureController extends Controller
@@ -49,5 +50,16 @@ class PictureController extends Controller
     public function all(Picture $picture)
     {
         return $picture->all(['url', 'width', 'height', 'title']);
+    }
+
+    public function like(Picture $picture, Request $request)
+    {
+        $user = $request->user();
+        if ($liked = $user->hasLiked($picture)) {
+            $user->unlike($picture);
+        } else {
+            $user->like($picture);
+        }
+        return response(['count' => $picture->likers()->count(), 'liked' => !$liked]);
     }
 }

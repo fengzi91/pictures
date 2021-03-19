@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterUserController;
 use App\Http\Controllers\Api\Auth\UpdatePasswordController;
 use App\Http\Controllers\Api\CollectController;
@@ -8,8 +7,7 @@ use App\Http\Controllers\Api\TagController;
 use App\Http\Controllers\Api\UploadController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\PictureController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\PictureController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,12 +33,17 @@ Route::get('user/{user}', [UserController::class, 'show']);
 
 // 需要登录才可以操作的接口
 Route::middleware('auth:sanctum')->group(function($route) {
+    Route::get('me', [UserController::class, 'me']);
     // 上传图片
     $route->post('upload', [UploadController::class, 'store']);
+    // 给图片点赞
+    $route->post('picture/{picture}/like', [PictureController::class, 'like']);
     // 创建分享集
     $route->post('collect', [CollectController::class, 'store']);
     // 修改分享集
     $route->put('collect/{collect:link}', [CollectController::class, 'update']);
+    // 给分享集点赞
+    $route->post('collect/{collect:link}/like', [CollectController::class, 'like']);
     // 用户
     $route->post('user', [UserController::class, 'update']);
     $route->get('user/collect', [UserController::class, 'collect']);

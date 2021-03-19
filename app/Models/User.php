@@ -8,10 +8,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Overtrue\LaravelLike\Traits\Liker;
 
 class User extends Authenticatable
 {
-    use HasProfilePhoto, HasApiTokens, HasFactory, Notifiable;
+    use HasProfilePhoto,
+        HasApiTokens,
+        HasFactory,
+        Notifiable,
+        Liker;
 
     /**
      * The attributes that are mass assignable.

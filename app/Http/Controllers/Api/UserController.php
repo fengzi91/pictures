@@ -8,11 +8,16 @@ use App\Http\Resources\UserResource;
 use App\Models\Collect;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class UserController extends Controller
 {
+    public function me()
+    {
+        return UserResource::make(Auth::user());
+    }
     public function update(Request $request)
     {
         Validator::make($request->all(), [

@@ -5,11 +5,14 @@ namespace App\Models;
 use App\Models\Traits\DateTimeFormat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Overtrue\LaravelLike\Traits\Likeable;
 use Ramsey\Uuid\Uuid;
 
 class Collect extends Model
 {
-    use HasFactory, DateTimeFormat;
+    use HasFactory,
+        DateTimeFormat,
+        Likeable;
 
     protected $fillable = ['title', 'password'];
 

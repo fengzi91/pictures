@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CollectResource;
 use App\Models\Collect;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -23,11 +24,23 @@ class CollectController extends Controller
         if ($keyword = $request->keyword) {
             $query->where('title', 'LIKE', "%{$keyword}%");
         }
-        $collects = QueryBuilder::for($query)
-            ->allowedIncludes('pictures')
-            ->allowedFilters(AllowedFilter::exact('user_id'))
+
+        if ($type = $request->input('type', false)) {
+            if ($type === 'liked') {
+                $filter = $request->only('filter');
+                $user_id = isset($filter['user_id']) ? $filter['user_id'] : Auth::id();
+                $query->whereHas('likers', function($query) use ($user_id) {
+                    $query->where('user_id', $user_id);
+                });
+            }
+            $queryBuilder = QueryBuilder::for($query);
+        } else {
+            $queryBuilder = QueryBuilder::for($query)->allowedFilters(AllowedFilter::exact('user_id'));
+        }
+        $collects = $queryBuilder->allowedIncludes('pictures')
             ->allowedSorts(['created_at', 'thumb_up', 'view_counts'])
             ->with('user')
+            ->withCount('likers')
             ->has('pictures')
             ->whereNull('password')
             ->paginate(10);
@@ -71,6 +84,18 @@ class CollectController extends Controller
         }
         return abort(422,'密码错误');
     }
+
+    public function like(Collect $collect, Request $request)
+    {
+        $user = $request->user();
+        if ($liked = $user->hasLiked($collect)) {
+            $user->unlike($collect);
+        } else {
+            $user->like($collect);
+        }
+        return response(['count' => $collect->likers()->count(), 'liked' => !$liked]);
+    }
+
 
     /**
      * Update the specified resource in storage.
