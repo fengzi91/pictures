@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Password;
 class UpdatePasswordController extends Controller
 {
 
-    public function store(Request $request)
+    public function update(Request $request)
     {
         $request->validate([
             'old_password' => 'required|string',
