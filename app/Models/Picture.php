@@ -15,6 +15,11 @@ class Picture extends Model
     protected $fillable = ['title', 'tag', 'url', 'path', 'width', 'height'];
 
     protected $appends = ['url'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function getUrlAttribute()
     {
         return $this->attributes['url']

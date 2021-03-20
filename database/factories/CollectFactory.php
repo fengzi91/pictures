@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Collect;
+use App\Models\Picture;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CollectFactory extends Factory
@@ -22,7 +24,8 @@ class CollectFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->sentence(2),
+            'user_id' => User::factory()
         ];
     }
 }

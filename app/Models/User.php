@@ -60,4 +60,13 @@ class User extends Authenticatable
             $user->uuid = Uuid::uuid4()->toString();
         });
     }
+
+    /**
+     * 用户的分享集
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function collects()
+    {
+        return $this->hasMany(Collect::class);
+    }
 }

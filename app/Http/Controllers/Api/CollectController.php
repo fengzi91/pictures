@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Collect\CreateRequest;
 use App\Http\Resources\CollectResource;
 use App\Models\Collect;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class CollectController extends Controller
 
         if ($type = $request->input('type', false)) {
             if ($type === 'liked') {
-                $filter = $request->only('filter');
+                $filter = $request->input('filter');
                 $user_id = isset($filter['user_id']) ? $filter['user_id'] : Auth::id();
                 $query->whereHas('likers', function($query) use ($user_id) {
                     $query->where('user_id', $user_id);
@@ -53,9 +54,8 @@ class CollectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return CollectResource|\Illuminate\Http\Response
      */
-    public function store(Request $request, Collect $collect)
+    public function store(CreateRequest $request, Collect $collect)
     {
-        $request->validate($this->rules());
         $collect->fill($request->all());
         $collect->user_id = $request->user()->id;
         $collect->save();
@@ -79,10 +79,10 @@ class CollectController extends Controller
 
     public function checkPassword(Collect $collect, Request $request)
     {
-        if ($request->input('password', false) && $collect->password === $request->input('password')) {
-            return response(204);
-        }
-        return abort(422,'密码错误');
+        $request->validate([
+            'password' => 'required|in:' . $collect->password,
+        ], ['password.in' => '密码不正确']);
+        return response('', 204);
     }
 
     public function like(Collect $collect, Request $request)
@@ -131,8 +131,8 @@ class CollectController extends Controller
         return [
             'title' => 'nullable|string|between:5,32',
             'password' => 'nullable|string|min:4,max:12',
-            'pictures' => 'array',
-            'pictures.*' => 'integer'
+            'pictures' => 'required_if:title,null|array',
+            'pictures.*' => 'integer|exists:pictures,id'
         ];
     }
 }

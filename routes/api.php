@@ -38,10 +38,26 @@ Route::name('api.pictures.')->prefix('pictures')->group(function ($route) {
     $route->get('/{picture:uuid}', [PictureController::class, 'show'])->name('show');
 });
 
+// 用户
 Route::name('api.user.')->prefix('user')->group(function ($route) {
     $route->get('/{user:uuid}/pictures', [UserPictureController::class, 'index'])->name('pictures.index');
 });
 
+// 分享集
+Route::name('api.collects.')->prefix('collects')->group(function ($route) {
+    $route->get('', [CollectController::class, 'index'])->name('index');
+    $route->get('/{collect:link}', [CollectController::class, 'show'])->name('show');
+    $route->post('/{collect:link}/check_password', [CollectController::class, 'checkPassword'])->name('password.check');
+});
+// 需要登录
+Route::name('api.collects.')->middleware('auth:sanctum')->prefix('collects')->group(function ($route) {
+    // 创建分享集
+    $route->post('', [CollectController::class, 'store'])->name('store');
+    // 修改分享集
+    $route->put('/{collect:link}', [CollectController::class, 'update']);
+    // 给分享集点赞
+    $route->post('/{collect:link}/like', [CollectController::class, 'like'])->name('like');
+});
 // 需要登录才可以操作的接口
 Route::middleware('auth:sanctum')->group(function($route) {
 
@@ -50,16 +66,6 @@ Route::middleware('auth:sanctum')->group(function($route) {
     $route->post('upload', [UploadController::class, 'store']);
     // 给图片点赞
     $route->post('picture/{picture}/like', [PictureController::class, 'like']);
-
-    // 分享集
-    $route->group(['prefix' => 'collect'], function ($route) {
-        // 创建分享集
-        $route->post('', [CollectController::class, 'store']);
-        // 修改分享集
-        $route->put('/{collect:link}', [CollectController::class, 'update']);
-        // 给分享集点赞
-        $route->post('/{collect:link}/like', [CollectController::class, 'like']);
-    });
 
     // 用户
     $route->post('user', [UserController::class, 'update']);
@@ -70,7 +76,7 @@ Route::middleware('auth:sanctum')->group(function($route) {
     $route->delete('logout', [AuthenticatedSessionController::class, 'destroy']);
 });
 Route::get('collect', [CollectController::class, 'index']);
-Route::post('collect/{collect:link}/check_password', [CollectController::class, 'checkPassword']);
+
 Route::get('collect/{collect:link}', [CollectController::class, 'show']);
 // 标签
 Route::get('tags', [TagController::class, 'index']);
