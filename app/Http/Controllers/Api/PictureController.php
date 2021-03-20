@@ -23,10 +23,7 @@ class PictureController extends Controller
 
     public function show(Request $request, Picture $picture)
     {
-        if ($picture->where('url', $request->url)->exists()) {
-            return ['download' => true];
-        }
-        return ['download' => false];
+        return PictureResource::make($picture);
     }
 
     public function index(Request $request, Picture $picture)

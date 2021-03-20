@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\UploadController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Api\PictureController;
+use App\Http\Controllers\Api\User\PictureController as UserPictureController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,9 +29,18 @@ Route::get('sanctum/csrf-cookie', [Laravel\Sanctum\Http\Controllers\CsrfCookieCo
 Route::post('authorizations', [AuthenticatedSessionController::class, 'store']);
 Route::post('register', [RegisterUserController::class, 'store']);
 
-
 // 用户信息
 Route::get('user/{user}', [UserController::class, 'show']);
+
+// 图片
+Route::name('api.pictures.')->prefix('pictures')->group(function ($route) {
+    $route->get('', [PictureController::class, 'index'])->name('index');
+    $route->get('/{picture:uuid}', [PictureController::class, 'show'])->name('show');
+});
+
+Route::name('api.user.')->prefix('user')->group(function ($route) {
+    $route->get('/{user:uuid}/pictures', [UserPictureController::class, 'index'])->name('pictures.index');
+});
 
 // 需要登录才可以操作的接口
 Route::middleware('auth:sanctum')->group(function($route) {
@@ -65,8 +75,6 @@ Route::get('collect/{collect:link}', [CollectController::class, 'show']);
 // 标签
 Route::get('tags', [TagController::class, 'index']);
 Route::post('pictures', [PictureController::class, 'store']);
-Route::get('pictures', [PictureController::class, 'show']);
-Route::get('random', [PictureController::class, 'index']);
 Route::get('all', [PictureController::class, 'all']);
 
 

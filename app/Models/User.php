@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Overtrue\LaravelLike\Traits\Liker;
+use Ramsey\Uuid\Uuid;
 
 class User extends Authenticatable
 {
@@ -52,4 +53,11 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    protected static function booted()
+    {
+        static::creating(function ($user) {
+            $user->uuid = Uuid::uuid4()->toString();
+        });
+    }
 }

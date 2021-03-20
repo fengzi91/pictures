@@ -22,7 +22,11 @@ class PictureFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->sentence,
+            'url' => $this->faker->imageUrl(),
+            'width' => $this->faker->numberBetween(100, 1000),
+            'height' => $this->faker->numberBetween(200, 3000),
+            'uuid' => $this->faker->uuid,
         ];
     }
 }
