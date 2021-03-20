@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterUserController;
 use App\Http\Controllers\Api\Auth\UpdatePasswordController;
 use App\Http\Controllers\Api\CollectController;
@@ -60,8 +61,10 @@ Route::name('api.collects.')->middleware('auth:sanctum')->prefix('collects')->gr
 });
 // 需要登录才可以操作的接口
 Route::middleware('auth:sanctum')->group(function($route) {
-
+    // 获取个人信息，检查登录
     $route->get('me', [UserController::class, 'me']);
+    // 注销登录
+    $route->delete('logout', [LoginController::class, 'logout']);
     // 上传图片
     $route->post('upload', [UploadController::class, 'store']);
     // 给图片点赞
@@ -73,7 +76,7 @@ Route::middleware('auth:sanctum')->group(function($route) {
     // 修改密码
     $route->post('password', [UpdatePasswordController::class, 'update']);
     // 注销登录
-    $route->delete('logout', [AuthenticatedSessionController::class, 'destroy']);
+    // $route->delete('logout', [AuthenticatedSessionController::class, 'destroy']);
 });
 Route::get('collect', [CollectController::class, 'index']);
 
