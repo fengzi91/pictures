@@ -73,7 +73,7 @@ class CollectController extends Controller
     public function show(Request $request, Collect $collect)
     {
         $this->authorize('view', $collect);
-        $collect->loadMissing('pictures');
+        $collect->loadMissing(['pictures', 'user']);
         return CollectResource::make($collect);
     }
 
