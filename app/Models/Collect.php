@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
+use App\Models\Traits\DateTimeFormat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Overtrue\LaravelLike\Traits\Likeable;
 use Ramsey\Uuid\Uuid;
 
 class Collect extends Model
 {
-    use HasFactory;
+    use HasFactory,
+        DateTimeFormat,
+        Likeable;
 
     protected $fillable = ['title', 'password'];
 
@@ -21,6 +25,11 @@ class Collect extends Model
         static::creating(function($collect) {
             $collect->link = self::createLink();
         });
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function pictures()

@@ -16,7 +16,7 @@ class EmailVerificationTest extends TestCase
 
     public function test_email_verification_screen_can_be_rendered()
     {
-        $user = User::factory()->create([
+        $user = create(User::class, [
             'email_verified_at' => null,
         ]);
 
@@ -27,11 +27,13 @@ class EmailVerificationTest extends TestCase
 
     public function test_email_can_be_verified()
     {
-        Event::fake();
 
-        $user = User::factory()->create([
+
+        $user = create(User::class, [
             'email_verified_at' => null,
         ]);
+
+        Event::fake();
 
         $verificationUrl = URL::temporarySignedRoute(
             'verification.verify',

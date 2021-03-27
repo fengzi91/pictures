@@ -15,8 +15,8 @@ class CreatePicturesTable extends Migration
     {
         Schema::create('pictures', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->index();
             $table->string('title')->nullable();
-            $table->string('tag')->index();
             $table->string('url')->nullable();
             $table->integer('width')->default(0);
             $table->integer('height')->default(0);
