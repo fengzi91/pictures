@@ -45,6 +45,7 @@ class CollectController extends Controller
             ->has('pictures')
             ->whereNull('password')
             ->paginate(10);
+
         return CollectResource::collection($collects);
     }
 

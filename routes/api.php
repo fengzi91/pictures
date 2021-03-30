@@ -27,7 +27,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('sanctum/csrf-cookie', [Laravel\Sanctum\Http\Controllers\CsrfCookieController::class, 'show']);
 
 // 登录注册相关
+// 用户登录
 Route::post('authorizations', [AuthenticatedSessionController::class, 'store']);
+// 用户注册
 Route::post('register', [RegisterUserController::class, 'store']);
 
 // 用户信息

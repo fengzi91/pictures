@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasLikeData;
 use App\Models\Traits\HasProfilePhoto;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,7 +18,8 @@ class User extends Authenticatable
         HasApiTokens,
         HasFactory,
         Notifiable,
-        Liker;
+        Liker,
+        HasLikeData;
 
     /**
      * The attributes that are mass assignable.
