@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\CollectService;
+use App\Contracts\CollectContract;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(CollectContract::class, CollectService::class);
     }
 
     /**
@@ -23,6 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+
     }
 }

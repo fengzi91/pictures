@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Collect\CreateRequest;
 use App\Http\Resources\CollectResource;
 use App\Models\Collect;
+use App\Contracts\CollectContract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -14,6 +15,12 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class CollectController extends Controller
 {
+    protected $collectService;
+
+    public function __construct(CollectContract $collectService)
+    {
+        $this->collectService = $collectService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,40 +28,7 @@ class CollectController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Collect::query();
-        if ($keyword = $request->keyword) {
-            $query->where('title', 'LIKE', "%{$keyword}%");
-        }
-
-        if ($type = $request->input('type', false)) {
-            if ($type === 'liked') {
-                $filter = $request->input('filter');
-                $user_id = isset($filter['user_id']) ? $filter['user_id'] : Auth::id();
-                $query->whereHas('likers', function($query) use ($user_id) {
-                    $query->where('user_id', $user_id);
-                });
-            }
-            $queryBuilder = QueryBuilder::for($query);
-        } else {
-            $queryBuilder = QueryBuilder::for($query)->allowedFilters(AllowedFilter::exact('user_id'));
-        }
-        $collects = $queryBuilder->allowedIncludes('pictures')
-            ->allowedSorts(['created_at', 'thumb_up', 'view_counts'])
-            ->with('user')
-            ->withCount('likers')
-            ->has('pictures')
-            ->whereNull('password')
-            ->paginate(10);
-        $additional = [
-            'liked' => []
-        ];
-
-        if (Auth::check()) {
-            $additional['liked'] = Auth::user()->isLikedByCache($collects->pluck('id')->toArray(), 'collect');
-            $additional['user'] = Auth::user();
-        }
-
-        return CollectResource::collection($collects)->additional($additional);
+        return $this->collectService->getList($request);
     }
 
     /**

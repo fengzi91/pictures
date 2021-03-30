@@ -24,7 +24,6 @@ class LikeCollectTest extends TestCase
 
         $user = create(User::class);
         $this->actingAs($user);
-        // dd(route('api.collects.like', ['collect' => $collect->link]));
         $response = $this->post(route('api.collects.like', ['collect' => $collect]));
 
         $response->assertStatus(200)
@@ -65,13 +64,15 @@ class LikeCollectTest extends TestCase
 
         $this->signIn($user);
         $response = $this->get(route('api.collects.index'));
-        $liked = $likedCollects->pluck('link')->map(function($link) {
-            return (string) $link;
+        $responseLiked = [];
+        foreach ($response->json('liked') as $liked) {
+            $responseLiked[] = key($liked);
+        }
+        $likedCollects->each(function($collect) use ($responseLiked) {
+            $this->assertTrue(in_array($collect->link, $responseLiked));
         });
-        $assertJson = [
-            'liked' => $liked
-        ];
-        $response->assertJsonFragment($assertJson);
+        // 元素个数要相同
+        $this->assertEquals(count($likedCollects), count($responseLiked));
         refreshRedis();
     }
 }
