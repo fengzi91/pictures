@@ -3,11 +3,13 @@
 namespace App\Providers;
 
 use App\Listeners\UserLikedListener;
+use App\Listeners\UserUnlikedListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Overtrue\LaravelLike\Events\Liked;
+use Overtrue\LaravelLike\Events\Unliked;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         Liked::class => [
             UserLikedListener::class,
+        ],
+        Unliked::class => [
+            UserUnlikedListener::class
         ]
     ];
 

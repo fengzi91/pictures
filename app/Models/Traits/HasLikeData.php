@@ -48,6 +48,12 @@ trait HasLikeData {
         Redis::command('EXPIRE', [$this->likeCacheKey($type), $this->like_cache_expire]);
     }
 
+    public function removeLikedData($ids, $type = 'collect')
+    {
+        Redis::command('SREM', collect([$this->likeCacheKey($type)])->concat($ids)->toArray());
+        Redis::command('EXPIRE', [$this->likeCacheKey($type), $this->like_cache_expire]);
+    }
+
     public function refreshLiked($type = null)
     {
         if ($type) {

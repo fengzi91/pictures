@@ -35,6 +35,10 @@ class UserLikedDataTest extends TestCase
 
         $result = $user->isLikedByCache([$collect->id], $type = 'collect');
         $this->assertCount(1, $result, '分享集 id 没有正确放入点赞缓存中');
+        // 取消赞
+        $user->unlike($collect);
+        $result = $user->isLikedByCache([$collect->id], $type = 'collect');
+        $this->assertCount(0, $result, '分享集 id 没有从点赞缓存中移除');
         refreshRedis();
     }
 }

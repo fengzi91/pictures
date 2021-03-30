@@ -61,6 +61,12 @@ Route::name('api.collects.')->middleware('auth:sanctum')->prefix('collects')->gr
     // 给分享集点赞
     $route->post('/{collect:link}/like', [CollectController::class, 'like'])->name('like');
 });
+
+// 需要登录的图片相关接口
+Route::name('api.pictures.')->middleware('auth:sanctum')->prefix('pictures')->group(function($route) {
+    // 给图片点赞
+    $route->post('{picture:uuid}/like', [PictureController::class, 'like'])->name('like');
+});
 // 需要登录才可以操作的接口
 Route::middleware('auth:sanctum')->group(function($route) {
     // 获取个人信息，检查登录
@@ -69,16 +75,11 @@ Route::middleware('auth:sanctum')->group(function($route) {
     $route->delete('logout', [LoginController::class, 'destroy']);
     // 上传图片
     $route->post('upload', [UploadController::class, 'store']);
-    // 给图片点赞
-    $route->post('picture/{picture}/like', [PictureController::class, 'like']);
-
     // 用户
     $route->post('user', [UserController::class, 'update']);
     $route->get('user/collect', [UserController::class, 'collect']);
     // 修改密码
     $route->post('password', [UpdatePasswordController::class, 'update']);
-    // 注销登录
-    // $route->delete('logout', [AuthenticatedSessionController::class, 'destroy']);
 });
 Route::get('collect', [CollectController::class, 'index']);
 

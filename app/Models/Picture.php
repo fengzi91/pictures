@@ -12,6 +12,9 @@ use Spatie\Tags\HasTags;
 class Picture extends Model
 {
     use HasFactory, HasTags, Searchable,Likeable;
+
+    const LIKE_TYPE_NAME = 'picture';
+
     protected $fillable = ['title', 'tag', 'url', 'path', 'width', 'height'];
 
     protected $appends = ['url'];
