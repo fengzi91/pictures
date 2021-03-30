@@ -2,31 +2,17 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Responses\LoginResponse;
+use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
+use Laravel\Fortify\Http\Requests\LoginRequest;
 
-class LoginController extends Controller
+class LoginController extends AuthenticatedSessionController
 {
-    public function login(LoginRequest $request)
+
+    public function store(LoginRequest $request)
     {
-        $request->authenticate();
-        $user = Auth::user();
-        $token = $user->createToken('spa');
-        return [
-            'token' => $token->plainTextToken,
-            'data' => $user
-        ];
-    }
-
-    public function logout(Request $request)
-    {
-        Auth::guard('web')->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-        return response()->noContent();
+        return $this->loginPipeline($request)->then(function ($request) {
+            return app(LoginResponse::class);
+        });
     }
 }

@@ -19,3 +19,11 @@ function refreshMeilisearch($model)
     // dump();
     Artisan::call('scout:flush', ['model' => (new \ReflectionClass($model))->getName()]);
 }
+
+/**
+ * 清空 redis 数据库
+ */
+function refreshRedis()
+{
+    Illuminate\Support\Facades\Redis::command('FLUSHDB');
+}

@@ -45,8 +45,16 @@ class CollectController extends Controller
             ->has('pictures')
             ->whereNull('password')
             ->paginate(10);
+        $additional = [
+            'liked' => []
+        ];
 
-        return CollectResource::collection($collects);
+        if (Auth::check()) {
+            $additional['liked'] = Auth::user()->isLikedByCache($collects->pluck('id')->toArray(), 'collect');
+            $additional['user'] = Auth::user();
+        }
+
+        return CollectResource::collection($collects)->additional($additional);
     }
 
     /**

@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\CollectController;
 use App\Http\Controllers\Api\TagController;
 use App\Http\Controllers\Api\UploadController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
+// use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Api\PictureController;
 use App\Http\Controllers\Api\User\PictureController as UserPictureController;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +28,7 @@ Route::get('sanctum/csrf-cookie', [Laravel\Sanctum\Http\Controllers\CsrfCookieCo
 
 // 登录注册相关
 // 用户登录
-Route::post('authorizations', [AuthenticatedSessionController::class, 'store']);
+Route::post('authorizations', [LoginController::class, 'store']);
 // 用户注册
 Route::post('register', [RegisterUserController::class, 'store']);
 
@@ -66,7 +66,7 @@ Route::middleware('auth:sanctum')->group(function($route) {
     // 获取个人信息，检查登录
     $route->get('me', [UserController::class, 'me']);
     // 注销登录
-    $route->delete('logout', [LoginController::class, 'logout']);
+    $route->delete('logout', [LoginController::class, 'destroy']);
     // 上传图片
     $route->post('upload', [UploadController::class, 'store']);
     // 给图片点赞

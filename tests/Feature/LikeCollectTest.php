@@ -42,4 +42,36 @@ class LikeCollectTest extends TestCase
         $this->assertFalse($user->hasLiked($collect));
         $this->assertFalse($collect->isLikedBy($user));
     }
+
+    /**
+     * 分享集接口可以正确返回用户是否点赞指定数据
+     *
+     * @return void
+     */
+    /** @test */
+    public function user_get_collects_with_is_liked()
+    {
+        refreshRedis();
+        $collects = Collect::factory()->has(Picture::factory())->count(10)->create();
+        $user = create(User::class);
+        $response = $this->get(route('api.collects.index'));
+        $response->assertJsonFragment(['liked' => []]);
+        // 随机点赞数据
+        $likedCollects = $collects->random(3);
+
+        $likedCollects->each(function($collect) use($user) {
+            $user->like($collect);
+        });
+
+        $this->signIn($user);
+        $response = $this->get(route('api.collects.index'));
+        $liked = $likedCollects->pluck('link')->map(function($link) {
+            return (string) $link;
+        });
+        $assertJson = [
+            'liked' => $liked
+        ];
+        $response->assertJsonFragment($assertJson);
+        refreshRedis();
+    }
 }
