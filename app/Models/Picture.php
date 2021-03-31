@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Scout\Searchable;
 use Overtrue\LaravelLike\Traits\Likeable;
+use Ramsey\Uuid\Uuid;
 use Spatie\Tags\HasTags;
 
 class Picture extends Model
@@ -15,9 +16,16 @@ class Picture extends Model
 
     const LIKE_TYPE_NAME = 'picture';
 
-    protected $fillable = ['title', 'tag', 'url', 'path', 'width', 'height'];
+    protected $fillable = ['title', 'url', 'path', 'width', 'height'];
 
     protected $appends = ['url'];
+
+    protected static function booted()
+    {
+        static::creating(function($collect) {
+            $collect->uuid = Uuid::uuid4();
+        });
+    }
 
     public function user()
     {

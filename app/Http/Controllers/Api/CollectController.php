@@ -57,6 +57,9 @@ class CollectController extends Controller
     {
         $this->authorize('view', $collect);
         $collect->loadMissing(['pictures', 'user']);
+        if (Auth::check() && Auth::id() === $collect->user_id) {
+            $collect->makeVisible('password');
+        }
         return CollectResource::make($collect);
     }
 
