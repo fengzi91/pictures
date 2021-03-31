@@ -56,6 +56,7 @@ class CollectController extends Controller
     public function show(Request $request, Collect $collect)
     {
         $this->authorize('view', $collect);
+        $collect->loadCount('likers');
         $collect->loadMissing(['pictures', 'user']);
         if (Auth::check() && Auth::id() === $collect->user_id) {
             $collect->makeVisible('password');
