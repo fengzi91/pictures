@@ -36,9 +36,13 @@ class PictureController extends Controller
     {
         $keyword = $request->input('keyword', '');
         $tag = $request->input('tag', 0);
+        $user_id = $request->input('user_id', 0);
         $filters = null;
         if ($tag > 0) {
             $filters .= 'tag_id = ' . $tag;
+        }
+        if ($user_id > 0) {
+            $filters .= ' user_id = ' . $user_id;
         }
         $pictures = $picture->search($keyword, function(Indexes $meilisearch, $query, $options)  use ($filters) {
             if ($filters) {
