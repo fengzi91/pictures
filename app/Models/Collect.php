@@ -14,6 +14,8 @@ class Collect extends Model
         DateTimeFormat,
         Likeable;
 
+    const LIKE_TYPE_NAME = 'collect';
+
     protected $fillable = ['title', 'password'];
 
     protected $hidden = ['password'];

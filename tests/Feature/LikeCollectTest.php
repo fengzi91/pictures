@@ -24,7 +24,6 @@ class LikeCollectTest extends TestCase
 
         $user = create(User::class);
         $this->actingAs($user);
-        // dd(route('api.collects.like', ['collect' => $collect->link]));
         $response = $this->post(route('api.collects.like', ['collect' => $collect]));
 
         $response->assertStatus(200)
@@ -41,5 +40,39 @@ class LikeCollectTest extends TestCase
             ->assertJsonPath('liked', false);
         $this->assertFalse($user->hasLiked($collect));
         $this->assertFalse($collect->isLikedBy($user));
+    }
+
+    /**
+     * 分享集接口可以正确返回用户是否点赞指定数据
+     *
+     * @return void
+     */
+    /** @test */
+    public function user_get_collects_with_is_liked()
+    {
+        refreshRedis();
+        $collects = Collect::factory()->has(Picture::factory())->count(10)->create();
+        $user = create(User::class);
+        $response = $this->get(route('api.collects.index'));
+        $response->assertJsonFragment(['liked' => []]);
+        // 随机点赞数据
+        $likedCollects = $collects->random(3);
+
+        $likedCollects->each(function($collect) use($user) {
+            $user->like($collect);
+        });
+
+        $this->signIn($user);
+        $response = $this->get(route('api.collects.index'));
+        $responseLiked = [];
+        foreach ($response->json('liked') as $liked) {
+            $responseLiked[] = key($liked);
+        }
+        $likedCollects->each(function($collect) use ($responseLiked) {
+            $this->assertTrue(in_array($collect->link, $responseLiked));
+        });
+        // 元素个数要相同
+        $this->assertEquals(count($likedCollects), count($responseLiked));
+        refreshRedis();
     }
 }

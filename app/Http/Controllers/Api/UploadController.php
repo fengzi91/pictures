@@ -21,7 +21,7 @@ class UploadController extends Controller
         $picture->height = $height;
         $picture->width = $width;
         $picture->path = $file_path;
-        $picture->tag = '测试';
+        // $picture->tag = '测试';
         $picture->user_id = $request->user()->id;
         $picture->save();
         return PictureResource::make($picture);
